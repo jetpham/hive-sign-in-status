@@ -1,14 +1,14 @@
-// app/api/updateSheet/route.ts
-
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { revalidatePath } from 'next/cache';
+
+const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
     try {
-        const { updatedData } = await request.json(); // Extract updated data from the request body
+        const { updatedData } = await request.json();
 
         console.log('Received updated data:', updatedData);
-        const prisma = new PrismaClient();
 
         await prisma.updatedData.create({
             data: {
@@ -21,8 +21,10 @@ export async function POST(request: Request) {
             },
         });
 
-        // Respond with a success message
-        return NextResponse.json({ message: 'Data received successfully' });
+        // Revalidate the home page
+        revalidatePath('/');
+
+        return NextResponse.json({ message: 'Data received and page revalidated successfully' });
     } catch (error) {
         console.error('Error processing request:', error);
         return NextResponse.json({ message: 'Error processing request' }, { status: 500 });

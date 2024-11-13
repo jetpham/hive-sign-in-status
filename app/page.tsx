@@ -16,7 +16,7 @@ import {
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { badgeVariants } from "@/components/ui/badge"
-
+import { unstable_noStore as noStore } from 'next/cache';
 
 const prisma = new PrismaClient();
 
@@ -31,11 +31,11 @@ type UpdatedDataType = {
   createdAt: Date;
 };
 
-export default async function Home() {
-  const updatedData: UpdatedDataType[] = await prisma.updatedData.findMany({
+async function getUpdatedData() {
+  noStore();
+  return await prisma.updatedData.findMany({
     where: {
       createdAt: {
-        // Get data from the last 24 hours
         gte: new Date(new Date().setDate(new Date().getDate() - 1)),
       },
     },
@@ -43,6 +43,10 @@ export default async function Home() {
       createdAt: 'desc',
     },
   });
+}
+
+export default async function Home() {
+  const updatedData: UpdatedDataType[] = await getUpdatedData();
 
   return (
     <>
@@ -56,7 +60,7 @@ export default async function Home() {
             <Link className={badgeVariants({ variant: "outline" })} href={"https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"}>Hive Sign In Form</Link>
           </div>
         </CardHeader>
-      </Card >
+      </Card>
       <Table>
         <TableHeader>
           <TableRow>
@@ -70,7 +74,7 @@ export default async function Home() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {updatedData.map((data) => (
+          {updatedData.map((data: UpdatedDataType) => (
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
               <TableCell>{data.duration}</TableCell>
@@ -84,13 +88,13 @@ export default async function Home() {
                   minute: '2-digit',
                   second: '2-digit',
                   hour12: true,
-                  timeZone: 'America/Los_Angeles' 
+                  timeZone: 'America/Los_Angeles'
                 })}
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-      </Table >
+      </Table>
     </>
   );
 }
