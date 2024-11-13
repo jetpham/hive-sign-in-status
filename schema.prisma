@@ -15,7 +15,7 @@ model UpdatedData {
     id        Int      @id @default(autoincrement())
     name      String
     duration  String
-    areas     String
+    areas     String[]
     major     String
     project   String
     opinion   String

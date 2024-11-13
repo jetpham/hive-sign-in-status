@@ -25,7 +25,7 @@ type UpdatedDataType = {
   id: number;
   name: string;
   duration: string;
-  areas: string;
+  areas: string[];
   major: string;
   project: string;
   opinion: string;
@@ -99,7 +99,7 @@ export default async function Home() {
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
               <TableCell>{data.duration}</TableCell>
-              <TableCell>{data.areas}</TableCell>
+              <TableCell>{data.areas.join(", ")}</TableCell>
               <TableCell>{data.major}</TableCell>
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
