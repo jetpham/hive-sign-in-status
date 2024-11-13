@@ -14,7 +14,7 @@ import {
 
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-import { Badge, badgeVariants } from "@/components/ui/badge"
+import { badgeVariants } from "@/components/ui/badge"
 
 
 const prisma = new PrismaClient();
@@ -47,7 +47,7 @@ export default async function Home() {
           <CardTitle style={{ paddingBottom: '10px' }}>Hive Sign Ins</CardTitle>
           <div style={{ display: 'flex', gap: '8px' }}>
             <Link className={badgeVariants({ variant: "outline" })} href={"https://github.com/jetpham/hive-sign-in-status"}>Github Repo</Link>
-            <Link className={badgeVariants({ variant: "outline" })} href={"https://jetpham.com/"}>Jet's Blog</Link>
+            <Link className={badgeVariants({ variant: "outline" })} href={"https://jetpham.com/"}>Jet&apos;s Blog</Link>
             <Link className={badgeVariants({ variant: "outline" })} href={"https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"}>Hive Sign In Form</Link>
           </div>
         </CardHeader>
