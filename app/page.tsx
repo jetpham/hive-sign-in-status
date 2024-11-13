@@ -38,6 +38,9 @@ export default async function Home() {
         gte: new Date(new Date().setDate(new Date().getDate() - 1)),
       },
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 
   return (
@@ -55,7 +58,6 @@ export default async function Home() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>ID</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Duration</TableHead>
             <TableHead>Areas</TableHead>
@@ -68,7 +70,6 @@ export default async function Home() {
         <TableBody>
           {updatedData.map((data) => (
             <TableRow key={data.id}>
-              <TableCell>{data.id}</TableCell>
               <TableCell>{data.name}</TableCell>
               <TableCell>{data.duration}</TableCell>
               <TableCell>{data.areas}</TableCell>
