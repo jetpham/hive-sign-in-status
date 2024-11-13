@@ -64,9 +64,9 @@ body {
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-gray-300; /* Ensure this class exists in your Tailwind config */
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[color:var(--background)] text-[color:var(--foreground)];
   }
 }

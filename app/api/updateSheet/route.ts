@@ -12,12 +12,13 @@ export async function POST(request: Request) {
 
     await prisma.updatedData.create({
       data: {
-        name: updatedData.name,
-        duration: updatedData.duration,
-        areas: updatedData.areas,
-        major: updatedData.major,
-        project: updatedData.project,
-        opinion: updatedData.opinion,
+        project: updatedData["What Project(s)/Class are you working on?"],
+        areas: updatedData["Area(s) of use"],
+        name: updatedData["Name"],
+        major: updatedData["Major"],
+        opinion: updatedData["Opinions about this form? Let us know"],
+        duration: updatedData["Anticipated duration of use"],
+        timestamp: new Date(updatedData["Timestamp"]),
       },
     });
 

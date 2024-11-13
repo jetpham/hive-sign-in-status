@@ -28,19 +28,19 @@ type UpdatedDataType = {
   major: string;
   project: string;
   opinion: string;
-  createdAt: Date;
+  timestamp: Date;
 };
 
 async function getUpdatedData() {
   noStore();
   return await prisma.updatedData.findMany({
     where: {
-      createdAt: {
+      timestamp: {
         gte: new Date(new Date().setDate(new Date().getDate() - 1)),
       },
     },
     orderBy: {
-      createdAt: "desc",
+      timestamp: "desc",
     },
   });
 }
@@ -102,7 +102,7 @@ export default async function Home() {
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(data.createdAt).toLocaleTimeString("en-US", {
+                {new Date(data.timestamp).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                   second: "2-digit",

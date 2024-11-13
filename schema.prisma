@@ -19,5 +19,5 @@ model UpdatedData {
     major     String
     project   String
     opinion   String
-    createdAt DateTime @default(now())
+    timestamp DateTime
 }
