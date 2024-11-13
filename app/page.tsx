@@ -76,7 +76,7 @@ export default async function Home() {
               <TableCell>{data.major}</TableCell>
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
-              <TableCell>{new Date(data.createdAt).toLocaleString()}</TableCell>
+                <TableCell>{new Date(data.createdAt).toLocaleTimeString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
