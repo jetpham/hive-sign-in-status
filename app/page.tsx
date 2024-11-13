@@ -17,6 +17,7 @@ import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { badgeVariants } from "@/components/ui/badge";
 import { unstable_noStore as noStore } from "next/cache";
+import { ModeToggle } from "@/components/theme-toggle";
 
 const prisma = new PrismaClient();
 
@@ -55,6 +56,7 @@ export default async function Home() {
           <CardTitle>Hive Sign Ins</CardTitle>
           <CardDescription style={{ paddingBottom: "10px" }}>
             From the past 24 hours
+            <ModeToggle />
           </CardDescription>
           <div style={{ display: "flex", gap: "8px" }}>
             <Link
