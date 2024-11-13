@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/table";
 import {
   Card,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -47,14 +48,15 @@ export default async function Home() {
     <>
       <Card>
         <CardHeader style={{ display: 'flex', alignItems: 'center' }}>
-          <CardTitle style={{ paddingBottom: '10px' }}>Hive Sign Ins</CardTitle>
+          <CardTitle>Hive Sign Ins</CardTitle>
+          <CardDescription style={{ paddingBottom: '10px' }}>From the past 24 hours</CardDescription>
           <div style={{ display: 'flex', gap: '8px' }}>
             <Link className={badgeVariants({ variant: "outline" })} href={"https://github.com/jetpham/hive-sign-in-status"}>Github Repo</Link>
             <Link className={badgeVariants({ variant: "outline" })} href={"https://jetpham.com/"}>Jet&apos;s Blog</Link>
             <Link className={badgeVariants({ variant: "outline" })} href={"https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"}>Hive Sign In Form</Link>
           </div>
         </CardHeader>
-      </Card>
+      </Card >
       <Table>
         <TableHeader>
           <TableRow>
@@ -64,7 +66,7 @@ export default async function Home() {
             <TableHead>Major</TableHead>
             <TableHead>Project</TableHead>
             <TableHead>Opinion</TableHead>
-            <TableHead>Created At</TableHead>
+            <TableHead>Timestamp</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -76,7 +78,7 @@ export default async function Home() {
               <TableCell>{data.major}</TableCell>
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
-                <TableCell>{new Date(data.createdAt).toLocaleTimeString()}</TableCell>
+              <TableCell>{new Date(data.createdAt).toLocaleTimeString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
