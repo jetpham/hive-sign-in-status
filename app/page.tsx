@@ -79,11 +79,12 @@ export default async function Home() {
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(data.createdAt).toLocaleTimeString(['en-US'], {
+                {new Date(data.createdAt).toLocaleTimeString('en-US', {
                   hour: '2-digit',
                   minute: '2-digit',
                   second: '2-digit',
-                  hour12: true // Use 12-hour format (AM/PM)
+                  hour12: true,
+                  timeZone: 'America/Los_Angeles' 
                 })}
               </TableCell>
             </TableRow>
