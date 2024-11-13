@@ -11,12 +11,12 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
-import { badgeVariants } from "@/components/ui/badge"
-import { unstable_noStore as noStore } from 'next/cache';
+import { badgeVariants } from "@/components/ui/badge";
+import { unstable_noStore as noStore } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -40,7 +40,7 @@ async function getUpdatedData() {
       },
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: "desc",
     },
   });
 }
@@ -51,13 +51,32 @@ export default async function Home() {
   return (
     <>
       <Card>
-        <CardHeader style={{ display: 'flex', alignItems: 'center' }}>
+        <CardHeader style={{ display: "flex", alignItems: "center" }}>
           <CardTitle>Hive Sign Ins</CardTitle>
-          <CardDescription style={{ paddingBottom: '10px' }}>From the past 24 hours</CardDescription>
-          <div style={{ display: 'flex', gap: '8px' }}>
-            <Link className={badgeVariants({ variant: "outline" })} href={"https://github.com/jetpham/hive-sign-in-status"}>Github Repo</Link>
-            <Link className={badgeVariants({ variant: "outline" })} href={"https://jetpham.com/"}>Jet&apos;s Blog</Link>
-            <Link className={badgeVariants({ variant: "outline" })} href={"https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"}>Hive Sign In Form</Link>
+          <CardDescription style={{ paddingBottom: "10px" }}>
+            From the past 24 hours
+          </CardDescription>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <Link
+              className={badgeVariants({ variant: "outline" })}
+              href={"https://github.com/jetpham/hive-sign-in-status"}
+            >
+              Github Repo
+            </Link>
+            <Link
+              className={badgeVariants({ variant: "outline" })}
+              href={"https://jetpham.com/"}
+            >
+              Jet&apos;s Blog
+            </Link>
+            <Link
+              className={badgeVariants({ variant: "outline" })}
+              href={
+                "https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"
+              }
+            >
+              Hive Sign In Form
+            </Link>
           </div>
         </CardHeader>
       </Card>
@@ -83,12 +102,12 @@ export default async function Home() {
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(data.createdAt).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
+                {new Date(data.createdAt).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
                   hour12: true,
-                  timeZone: 'America/Los_Angeles'
+                  timeZone: "America/Los_Angeles",
                 })}
               </TableCell>
             </TableRow>
