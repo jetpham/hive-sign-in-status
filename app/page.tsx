@@ -17,7 +17,6 @@ import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { badgeVariants } from "@/components/ui/badge";
 import { unstable_noStore as noStore } from "next/cache";
-import { ModeToggle } from "@/components/theme-toggle";
 
 const prisma = new PrismaClient();
 
@@ -56,7 +55,6 @@ export default async function Home() {
           <CardTitle>Hive Sign Ins</CardTitle>
           <CardDescription style={{ paddingBottom: "10px" }}>
             From the past 24 hours
-            <ModeToggle />
           </CardDescription>
           <div style={{ display: "flex", gap: "8px" }}>
             <Link
@@ -86,33 +84,34 @@ export default async function Home() {
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
+            <TableHead>Timestamp</TableHead>
             <TableHead>Duration</TableHead>
-            <TableHead>Areas</TableHead>
             <TableHead>Major</TableHead>
+            <TableHead>Areas</TableHead>
             <TableHead>Project</TableHead>
             <TableHead>Opinion</TableHead>
-            <TableHead>Timestamp</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {updatedData.map((data: UpdatedDataType) => (
             <TableRow key={data.id}>
               <TableCell>{data.name}</TableCell>
-              <TableCell>{data.duration}</TableCell>
-              <TableCell>{data.areas.join(", ")}</TableCell>
-              <TableCell>{data.major}</TableCell>
-              <TableCell>{data.project}</TableCell>
-              <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(data.timestamp).toLocaleString("en-US", {
-                  timeZoneName: "short",
+                {new Date(
+                  new Date(data.timestamp).getTime() +
+                    new Date(data.timestamp).getTimezoneOffset() * 60000
+                ).toLocaleString("en-US", {
                   timeZone: "America/Los_Angeles",
-                  hour: "2-digit",
+                  hour: "numeric",
                   minute: "2-digit",
-                  second: "2-digit",
                   hour12: true,
                 })}
               </TableCell>
+              <TableCell>{data.duration}</TableCell>
+              <TableCell>{data.major}</TableCell>
+              <TableCell>{data.areas.join(", ")}</TableCell>
+              <TableCell>{data.project}</TableCell>
+              <TableCell>{data.opinion}</TableCell>
             </TableRow>
           ))}
         </TableBody>
