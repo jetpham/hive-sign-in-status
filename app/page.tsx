@@ -104,9 +104,9 @@ export default async function Home() {
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(
-                  new Date(data.timestamp).getTime() + 8 * 60 * 60 * 1000
-                ).toLocaleString("en-US", {
+                {new Date(data.timestamp).toLocaleString("en-US", {
+                  timeZoneName: "short",
+                  timeZone: "America/Los_Angeles",
                   hour: "2-digit",
                   minute: "2-digit",
                   second: "2-digit",
