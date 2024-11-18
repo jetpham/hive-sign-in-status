@@ -98,13 +98,12 @@ export default async function Home() {
               <TableCell>{data.name}</TableCell>
               <TableCell>
                 {new Date(
-                  new Date(data.timestamp).getTime() +
-                    new Date(data.timestamp).getTimezoneOffset() * 60000
-                ).toLocaleString("en-US", {
-                  timeZone: "America/Los_Angeles",
-                  hour: "numeric",
-                  minute: "2-digit",
+                  data.timestamp.getTime() +
+                    data.timestamp.getTimezoneOffset() * 60 * 1000
+                ).toLocaleTimeString("en-US", {
                   hour12: true,
+                  hour: "numeric",
+                  minute: "numeric",
                 })}
               </TableCell>
               <TableCell>{data.duration}</TableCell>
