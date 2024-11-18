@@ -104,12 +104,13 @@ export default async function Home() {
               <TableCell>{data.project}</TableCell>
               <TableCell>{data.opinion}</TableCell>
               <TableCell>
-                {new Date(data.timestamp).toLocaleTimeString("en-US", {
+                {new Date(
+                  new Date(data.timestamp).getTime() + 8 * 60 * 60 * 1000
+                ).toLocaleString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                   second: "2-digit",
                   hour12: true,
-                  timeZone: "America/Los_Angeles",
                 })}
               </TableCell>
             </TableRow>
