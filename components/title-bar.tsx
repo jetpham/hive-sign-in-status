@@ -1,17 +1,15 @@
 "use client";
+import Bee from "./bee";
 import BadgeLinks from "./badge-links";
-import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 
 export default function TitleBar() {
   return (
-    <Card>
-      <CardHeader style={{ display: "flex", alignItems: "center" }}>
-        <CardTitle>Hive Sign Ins</CardTitle>
-        <CardDescription style={{ paddingBottom: "10px" }}>
-          From the past 24 hours
-        </CardDescription>
+    <div className="flex items-center justify-between p-4 bg-white shadow-md">
+      <div className="flex items-center gap-3">
+        <Bee height={24} color="#FDBB30" />
+        <h1 className="text-xl font-semibold">Hive Sign Ins</h1>
         <BadgeLinks />
-      </CardHeader>
-    </Card>
+      </div>
+    </div>
   );
 }

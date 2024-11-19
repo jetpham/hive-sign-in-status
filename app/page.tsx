@@ -32,6 +32,7 @@ async function getUpdatedData() {
 export default async function Home() {
   const updatedData: UpdatedDataType[] = await getUpdatedData();
 
+  //TODO: add a qr code for the hive sign in form
   return (
     <>
       <TitleBar />

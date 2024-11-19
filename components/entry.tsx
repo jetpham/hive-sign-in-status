@@ -9,14 +9,15 @@ export default function Entry({
 }: {
   updatedData: UpdatedDataType;
 }) {
-  const initials = updatedData.name
+  const capitalizedName = updatedData.name.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  );
+  const initials = capitalizedName
     .split(" ")
     .map((n) => n[0])
     .join("");
-  const { color, hoverColor, icon } =
-    updatedData.name === "Katie"
-      ? getMajorConfig("Katie")
-      : getMajorConfig(updatedData.major);
+  const { color, hoverColor, icon } = getMajorConfig(updatedData.major);
 
   return (
     <Card className="flex items-center justify-left px-3">
@@ -25,12 +26,7 @@ export default function Entry({
         <AvatarFallback className={`${color}`}>{initials}</AvatarFallback>
       </Avatar>
       <CardHeader className="p-3">
-        <CardTitle>
-          {updatedData.name.replace(
-            /\w\S*/g,
-            (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
-          )}
-        </CardTitle>
+        <CardTitle>{capitalizedName}</CardTitle>
         <CardDescription>
           {new Date(
             updatedData.timestamp.getTime() +
