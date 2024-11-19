@@ -1,26 +1,9 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
 import { PrismaClient } from "@prisma/client";
-import Link from "next/link";
-import { badgeVariants } from "@/components/ui/badge";
 import { unstable_noStore as noStore } from "next/cache";
+import TitleBar from "@/components/title-bar";
+import Entries from "@/components/entries";
 
-const prisma = new PrismaClient();
-
-type UpdatedDataType = {
+export type UpdatedDataType = {
   id: number;
   name: string;
   duration: string;
@@ -32,6 +15,8 @@ type UpdatedDataType = {
 };
 
 async function getUpdatedData() {
+  const prisma = new PrismaClient();
+  console.log("prisma fetch");
   noStore();
   return await prisma.updatedData.findMany({
     where: {
@@ -44,77 +29,13 @@ async function getUpdatedData() {
     },
   });
 }
-
 export default async function Home() {
   const updatedData: UpdatedDataType[] = await getUpdatedData();
 
   return (
     <>
-      <Card>
-        <CardHeader style={{ display: "flex", alignItems: "center" }}>
-          <CardTitle>Hive Sign Ins</CardTitle>
-          <CardDescription style={{ paddingBottom: "10px" }}>
-            From the past 24 hours
-          </CardDescription>
-          <div style={{ display: "flex", gap: "8px" }}>
-            <Link
-              className={badgeVariants({ variant: "outline" })}
-              href={"https://github.com/jetpham/hive-sign-in-status"}
-            >
-              Github Repo
-            </Link>
-            <Link
-              className={badgeVariants({ variant: "outline" })}
-              href={"https://jetpham.com/"}
-            >
-              Jet&apos;s Blog
-            </Link>
-            <Link
-              className={badgeVariants({ variant: "outline" })}
-              href={
-                "https://docs.google.com/forms/d/e/1FAIpQLSe9T3XuEwjwAPiANzvVZwvLueLBsqZZP569yjOm8rQ5OFZsYQ/viewform"
-              }
-            >
-              Hive Sign In Form
-            </Link>
-          </div>
-        </CardHeader>
-      </Card>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Timestamp</TableHead>
-            <TableHead>Duration</TableHead>
-            <TableHead>Major</TableHead>
-            <TableHead>Areas</TableHead>
-            <TableHead>Project</TableHead>
-            <TableHead>Opinion</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {updatedData.map((data: UpdatedDataType) => (
-            <TableRow key={data.id}>
-              <TableCell>{data.name}</TableCell>
-              <TableCell>
-                {new Date(
-                  data.timestamp.getTime() +
-                    data.timestamp.getTimezoneOffset() * 60 * 1000
-                ).toLocaleTimeString("en-US", {
-                  hour12: true,
-                  hour: "numeric",
-                  minute: "numeric",
-                })}
-              </TableCell>
-              <TableCell>{data.duration}</TableCell>
-              <TableCell>{data.major}</TableCell>
-              <TableCell>{data.areas.join(", ")}</TableCell>
-              <TableCell>{data.project}</TableCell>
-              <TableCell>{data.opinion}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+      <TitleBar />
+      <Entries updatedData={updatedData} />
     </>
   );
 }
