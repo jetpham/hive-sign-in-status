@@ -13,7 +13,10 @@ export default function Entry({
     .split(" ")
     .map((n) => n[0])
     .join("");
-  const { color, hoverColor, icon } = getMajorConfig(updatedData.major);
+  const { color, hoverColor, icon } =
+    updatedData.name === "Katie"
+      ? getMajorConfig("Katie")
+      : getMajorConfig(updatedData.major);
 
   return (
     <Card className="flex items-center justify-left px-3">

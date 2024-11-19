@@ -7,6 +7,7 @@ import {
   BriefcaseBusiness,
   DraftingCompass,
   TreePine,
+  Star,
 } from "lucide-react";
 
 export const majorConfig: {
@@ -47,14 +48,19 @@ export const majorConfig: {
     icon: <BriefcaseBusiness className="h-3 w-3" />,
   },
   Architecture: {
-    color: "bg-green-500 text-green-100",
-    hoverColor: "hover:bg-green-600 hover:text-green-50",
+    color: "bg-teal-500 text-teal-100",
+    hoverColor: "hover:bg-teal-600 hover:text-teal-50",
     icon: <DraftingCompass className="h-3 w-3" />,
   },
   Other: {
     color: "bg-stone-500 text-stone-100",
     hoverColor: "hover:bg-stone-600 hover:text-stone-50",
     icon: <TreePine className="h-3 w-3" />,
+  },
+  Katie: {
+    color: "bg-pink-500 text-pink-100",
+    hoverColor: "hover:bg-pink-600 hover:text-pink-50",
+    icon: <Star className="h-3 w-3" />,
   },
 };
 
