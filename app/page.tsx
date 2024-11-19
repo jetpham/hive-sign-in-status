@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-import { unstable_noStore as noStore } from "next/cache";
-import TitleBar from "@/components/title-bar";
 import Entries from "@/components/entries";
+import { unstable_cache } from "next/cache";
+import { cacheTag } from "next/dist/server/use-cache/cache-tag";
 
 export type UpdatedDataType = {
   id: number;
@@ -14,10 +14,12 @@ export type UpdatedDataType = {
   timestamp: Date;
 };
 
-async function getUpdatedData() {
-  const prisma = new PrismaClient();
-  console.log("prisma fetch");
-  noStore();
+const prisma = new PrismaClient();
+
+const getCachedEntries = unstable_cache(async () => {
+  "use cache";
+  cacheTag("entries");
+  console.log("Fetching updated data");
   return await prisma.updatedData.findMany({
     where: {
       timestamp: {
@@ -28,14 +30,14 @@ async function getUpdatedData() {
       timestamp: "desc",
     },
   });
-}
+});
+
 export default async function Home() {
-  const updatedData: UpdatedDataType[] = await getUpdatedData();
+  const updatedData: UpdatedDataType[] = await getCachedEntries();
 
   //TODO: add a qr code for the hive sign in form
   return (
     <>
-      <TitleBar />
       <Entries updatedData={updatedData} />
     </>
   );

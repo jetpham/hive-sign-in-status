@@ -29,8 +29,8 @@ export default function Entry({
         <CardTitle>{capitalizedName}</CardTitle>
         <CardDescription>
           {new Date(
-            updatedData.timestamp.getTime() +
-              updatedData.timestamp.getTimezoneOffset() * 60 * 1000
+            new Date(updatedData.timestamp).getTime() +
+              new Date(updatedData.timestamp).getTimezoneOffset() * 60 * 1000
           ).toLocaleTimeString("en-US", {
             hour12: true,
             hour: "numeric",

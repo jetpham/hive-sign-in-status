@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { expireTag } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -22,8 +22,7 @@ export async function POST(request: Request) {
       },
     });
 
-    // Revalidate the home page
-    revalidatePath("/");
+    expireTag("entries");
 
     return NextResponse.json({
       message: "Data received and page revalidated successfully",
@@ -32,7 +31,7 @@ export async function POST(request: Request) {
     console.error("Error processing request:", error);
     return NextResponse.json(
       { message: "Error processing request" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
